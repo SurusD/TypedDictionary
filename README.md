@@ -18,4 +18,6 @@ string gettingString = dictionary.Get<string>("key1"); // ArgumentException: All
 dictionary.DellocateType("key1"); // removes key1 and its value
 // also you can get required type for specific key
 System.Type type = dictionary.GetRequiredType("key1");
+// check if any type allocated for specific key
+bool exists = dictionary.CanAssign("key1");
 ```
