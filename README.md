@@ -1,23 +1,33 @@
-# TypedDictionary
-A dictionary where you can put values which is mathing with type allocated for specific keys
+# TypedDictionary Class
+=====================================
 
-```csharp
-TypedDictionary dictionary = new TypedDictionary();
-// now you can only put int to key1
-dictionary.AllocateType("key1", typeof(int));
-dictionary.Put("key1", 1); // correct
-dictionary.Put("key1", "1"); // ArgumentException: Type of value System.String does not match allocated type System.Int32 for key key1
-dictionary.Put("key2", 1); // ArgumentException: No type allocated for key key2
+### Overview
+-----------
 
-int gettingValue = dictionary.Get<int>("key1"); // correct
-string gettingString = dictionary.Get<string>("key1"); // ArgumentException: Allocated type System.Int32 for key key1 does not match type System.String
+The `TypedDictionary` class is a custom implementation designed to enforce type safety at runtime for key-value pairs stored in a dictionary-like structure. It ensures that each key is associated with a specific data type, preventing type mismatches when storing or retrieving values.
 
-// now getting value for key that does not exist
- gettingValue = dictionary.Get<int>("key2"); // ArgumentException: No type allocated for key key2
+### Description
+-------------
 
-dictionary.DellocateType("key1"); // removes key1 and its value
-// also you can get required type for specific key
-System.Type type = dictionary.GetRequiredType("key1");
-// check if any type allocated for specific key
-bool can = dictionary.CanAssign("key1");
-```
+* **Namespace:** `surus.util`
+* **Language:** C# (.NET)
+* **Key Features:**
+    + Type allocation for each key
+    + Runtime type checking for stored values
+    + Generic method for typed value retrieval
+    + Methods for allocating, checking, storing, retrieving, and deallocating types and values
+
+### Pros
+--------
+
+* **Enhanced Type Safety:** Ensures values stored under a key match the allocated type, reducing runtime type errors.
+* **Explicitness:** Forces developers to declare the type of data a key will hold, improving code clarity and maintainability.
+* **Flexibility:** Supports dynamic allocation and deallocation of types for keys, accommodating changing requirements.
+* **Strongly Typed Retrieval:** Generic `Get` method allows for retrieval of values in their native type, eliminating the need for explicit casting.
+
+### Cons
+--------
+
+* **Additional Overhead:** Requires explicit type allocation for each key, which might seem cumbersome for simple use cases.
+* **Runtime Checks:** While enhancing safety, these checks occur at runtime; careful planning is still necessary to avoid exceptions.
+* **Limited Support for Inheritance/Polymorphism:** Currently, the class does not natively support storing derived types under a base type key, which might limit its use in more complex object-oriented scenarios.
